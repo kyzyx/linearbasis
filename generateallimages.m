@@ -1,0 +1,10 @@
+generateimages('constant', @(x,n)constantbasis(x,n,1),25);
+close all;
+generateimages('rbf', @(x,n)rbfbasis(x,n,1,1),25);
+close all;
+generateimages('wavelet', @(x,n)haarwaveletbasis(x,n),32,14);
+close all;
+generateimages('poly', @(x,n)polybasis(x,n),20,3);
+close all;
+generateimages('sine', @(x,n)sinebasis(x,n),8,2);
+close all;
