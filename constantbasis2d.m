@@ -1,5 +1,5 @@
-function v = constantbasis2d(x, y, n, d, res)
-    px = mod(n,d);
-    py = floor(n/d);
-    v = (x >= px*res) & (x < (px+1)*res) & (y >= py*res) & (y < (py+1)*res);
+function v = constantbasis2d(x, y, n, d)
+    px = mod(n,d)/d;
+    py = floor(n/d)/d;
+    v = (x >= px) & (x < px+1/d) & (y >= py) & (y < py+1/d);
 end
