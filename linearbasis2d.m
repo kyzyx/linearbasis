@@ -1,3 +1,8 @@
+% Assumes a square input grayscale image z of resolution l x l,
+% projects it onto the first n basis functions of the linear basis
+% given by f.
+% f is a 3 parameter function f(x,y,n) that returns the values of the nth
+% basis function for input coordinates x,y from 0 to 1.
 function coef = linearbasis2d(f, l, z, n)
     x = reshape(repmat(1:l,l,1), 1, [])/l;
     y = reshape(repmat((1:l)',1,l), 1, [])/l;
