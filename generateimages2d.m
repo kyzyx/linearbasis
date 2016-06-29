@@ -1,4 +1,4 @@
-function generateimages2d(prefix, f, n, bindex)
+function generateimages2d(prefix, f, n)
     if nargin < 3
         n = 225;
     end
@@ -17,13 +17,16 @@ function generateimages2d(prefix, f, n, bindex)
     print([prefix '_image.png']);
 
     % Generate image of one basis function
-    if nargin < 4
-        bindex = floor(length(c)/2);
+    basisim = zeros(4*d+3,4*d+3);
+    for i=1:4
+        for j=1:4
+            idx = (i-1)*4+j;
+            cp = zeros(1, length(c));
+            cp(idx) = 1;
+            basisim(((i-1)*d+i):(i*d+i-1), ((j-1)*d+j):(j*d+j-1)) = evaluatelinearbasis2d(f,cp,d);
+        end
     end
-    cp = zeros(1, length(c));
-    cp(bindex) = 1;
-    z3 = evaluatelinearbasis2d(f,cp,d);
     figure(2);
-    imshowneg(z3);
+    imshowneg(basisim);
     print([prefix '_basis.png']);
 end
