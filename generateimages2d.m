@@ -1,6 +1,9 @@
-function generateimages2d(prefix, f, n)
+function generateimages2d(prefix, f, n, inc)
     if nargin < 3
         n = 225;
+    end
+    if nargin < 4
+        inc = 1;
     end
 
     z = double(imread("ffbw.png"))/255;
@@ -22,7 +25,7 @@ function generateimages2d(prefix, f, n)
         for j=1:4
             idx = (i-1)*4+j;
             cp = zeros(1, length(c));
-            cp(idx) = 1;
+            cp(idx*inc) = 1;
             basisim(((i-1)*d+i):(i*d+i-1), ((j-1)*d+j):(j*d+j-1)) = evaluatelinearbasis2d(f,cp,d);
         end
     end

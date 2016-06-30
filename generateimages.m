@@ -1,6 +1,9 @@
-function v = generateimages(prefix, f, n, bindex)
+function v = generateimages(prefix, f, n, inc)
     if nargin < 3
         n = 64;
+    end
+    if nargin < 4
+        inc = 1;
     end
 
     pkg load signal;
@@ -25,7 +28,7 @@ function v = generateimages(prefix, f, n, bindex)
         for j=1:3
             idx = (i-1)*4+j;
             cp = zeros(1, length(c));
-            cp(idx) = 1;
+            cp(idx*inc) = 1;
             y3 = evaluatelinearbasis(f,cp,x);
             figure(2);
             plot(x,y3,'b');
