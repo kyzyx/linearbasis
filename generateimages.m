@@ -19,15 +19,21 @@ function v = generateimages(prefix, f, n, bindex)
     print([prefix '_plot.png']);
 
     % Generate image of one basis function
-    if nargin < 4
-        bindex = floor(length(c)/2);
+    d = 500;
+    basisim = zeros(3*d+3,3*d+3,3);
+    for i=1:3
+        for j=1:3
+            idx = (i-1)*4+j;
+            cp = zeros(1, length(c));
+            cp(idx) = 1;
+            y3 = evaluatelinearbasis(f,cp,x);
+            figure(2);
+            plot(x,y3,'b');
+            yl = ylim;
+            ylim(yl*1.1);
+            print('_tmp.png', ['-S', num2str(d), ',', num2str(d-1)]);
+            basisim(((i-1)*d+i):(i*d+i-1), ((j-1)*d+j):(j*d+j-1),:) = imread('_tmp.png');
+        end
     end
-    cp = zeros(1, length(c));
-    cp(bindex) = 1;
-    y3 = evaluatelinearbasis(f,cp,x);
-    figure(2);
-    plot(x,y3,'b');
-    yl = ylim;
-    ylim(yl*1.1);
-    print([prefix '_basis.png']);
+    imwrite(uint8(basisim),[prefix '_basis.png']);
 end
