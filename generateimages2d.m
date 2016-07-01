@@ -13,11 +13,9 @@ function generateimages2d(prefix, f, n, inc)
     z2 = evaluatelinearbasis2d(f,c,d);
 
     % Generate comparison image
-    figure(1);
-    imshow(z2);
+    imwrite(z2, [prefix '_image.png']);
     [prefix ' squared error ' num2str(sum(sum((z-z2).^2)))]
     [prefix ' absolute error ' num2str(sum(sum(abs(z-z2))))]
-    print([prefix '_image.png']);
 
     % Generate image of one basis function
     basisim = zeros(4*d+3,4*d+3);
@@ -30,6 +28,6 @@ function generateimages2d(prefix, f, n, inc)
         end
     end
     figure(2);
-    imshowneg(basisim);
-    print([prefix '_basis.png']);
+    [~, negim] = imshowneg(basisim);
+    imwrite(negim, [prefix '_basis.png']);
 end

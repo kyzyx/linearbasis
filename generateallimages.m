@@ -25,18 +25,14 @@ c = linearbasis2d(f, d, z, 1023);
 c = c.*(abs(c)>0.03);
 [num2str(sum(abs(c)>0.03)) ' nonzero wavelet coefficients']
 z2 = evaluatelinearbasis2d(f, c, d);
-figure(1);
-imshow(z2);
+imwrite(z2, 'wavelet2d_image.png');
 ['wavelet2d squared error ' num2str(sum(sum((z-z2).^2)))]
 ['wavelet2d absolute error ' num2str(sum(sum(abs(z-z2))))]
-print('wavelet2d_image.png');
 f = @(x,y,n) cosinebasis2d(x,y,n);
 c = linearbasis2d(f, d, z, 1023);
 c = c.*(abs(c)>0.006);
 [num2str(sum(abs(c)>0.006)) ' nonzero cosine coefficients']
 z2 = evaluatelinearbasis2d(f, c, d);
-figure(1);
-imshow(z2);
+imwrite(z2, 'cosine2d_reduced_image.png');
 ['cosine2d squared error ' num2str(sum(sum((z-z2).^2)))]
 ['cosine2d absolute error ' num2str(sum(sum(abs(z-z2))))]
-print('cosine2d_reduced_image.png');
